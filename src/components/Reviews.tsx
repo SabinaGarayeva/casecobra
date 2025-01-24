@@ -15,7 +15,7 @@ const PHONES = [
   "/testimonials/6.jpg",
 ];
 
-function splitArray<T>(array: Array<T>, numParts: number) {
+function splitArray<T>(array: Array<T>, numParts: number): Array<Array<T>> {
   const result: Array<Array<T>> = [];
   for (let i = 0; i < array.length; i++) {
     const index = i % numParts;
@@ -24,6 +24,7 @@ function splitArray<T>(array: Array<T>, numParts: number) {
     }
     result[index].push(array[i]);
   }
+  return result;
 }
 
 function ReviewColumn({
@@ -37,7 +38,7 @@ function ReviewColumn({
   reviewClassName?: (reviewIndex: number) => string;
   msPerPixel?: number;
 }) {
-  const columnRef = useRef<HTMLElement | null>(null);
+  const columnRef = useRef<HTMLDivElement | null>(null);
   const [columnHeight, setColumnHeight] = useState(0);
   const duration = `${columnHeight * msPerPixel}ms`;
 
